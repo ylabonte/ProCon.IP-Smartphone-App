@@ -1,9 +1,27 @@
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
-// Font icon class
+// Font icon classes
 .fa {
     font-family: "FontAwesome";
 }
+
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+}
+
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: bold;
+}
+
+.ico {
+    font-family: "IcoMoon-Free";
+}
+
 // Common page class
 .page-content {
     .page-placeholder {
@@ -18,7 +36,8 @@
         vertical-align: top;
         horizontal-align: center;
         color: $page-icon-color;
-        margin-top: 20%;
+        margin-top: 10;
+        margin-bottom: 10;
     }
 }
 
@@ -33,7 +52,7 @@ $sidedrawer-header-image-offset-top: 20;
 $sidedrawer-header-image-offset-bottom: 5;
 $sidedrawer-list-item-offset-left: 15;
 $sidedrawer-list-icon-offset: 10;
-$sidedrawer-list-icon-size: 20;
+$sidedrawer-list-icon-size: 25;
 
 .sidedrawer {
     &.sidedrawer-left {
@@ -67,7 +86,7 @@ $sidedrawer-list-icon-size: 20;
 
         $sidedrawer-list-item-offset-left: 15;
         $sidedrawer-list-icon-offset: 10;
-        $sidedrawer-list-icon-size: 20;
+        $sidedrawer-list-icon-size: 25;
 
         .sidedrawer-list-item {
             padding-left: $sidedrawer-list-item-offset-left;
@@ -75,7 +94,7 @@ $sidedrawer-list-icon-size: 20;
                 vertical-align: center;
                 color: $blue-dark;
             }
-            .fa {
+            .fa, .far, .fas, .fab, .ico {
                 width: $sidedrawer-list-icon-size;
                 margin-right: $sidedrawer-list-icon-offset;
             }

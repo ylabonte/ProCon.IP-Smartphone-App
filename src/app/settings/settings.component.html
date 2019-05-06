@@ -1,21 +1,59 @@
 <ActionBar class="action-bar">
-    <!-- 
+    <!--
     Use the NavigationButton as a side-drawer button in Android
     because ActionItems are shown on the right side of the ActionBar
     -->
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!-- 
+    <!--
     Use the ActionItem for IOS with position set to left. Using the
     NavigationButton as a side-drawer button in iOS is not possible,
     because its function is to always navigate back in the application.
     -->
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
-        ios.position="left">
+                ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Settings"></Label>
+    <Label class="action-bar-title fas" text="&#xf013; Settings"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf013;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+<StackLayout class="page page-content">
+    <Label class="page-icon fas" text="&#xf5c5;"></Label>
+    <RadDataForm #proconIpSettingsDataForm id="proconIpSettings" [source]="proconIp" commitMode="Immediate" (propertyCommit)="dfPropertyCommit($event)">
+        <TKEntityProperty tkDataFormProperty name="host" index="0">
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Host address can't be empty."></TKNonEmptyValidator>
+            <TKMinimumLengthValidator tkEntityPropertyValidators errorMessage="Host address must be at least 1 character." length="1"></TKMinimumLengthValidator>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="port" displayName="Port" index="1">
+            <TKRangeValidator tkEntityPropertyValidators errorMessage="Port must be between 0-65535." minimum="0" maximum="65535"></TKRangeValidator>
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="username" index="2">
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Username can't be empty."></TKNonEmptyValidator>
+            <TKMinimumLengthValidator tkEntityPropertyValidators errorMessage="Username must be at least 3 characters." length="3"></TKMinimumLengthValidator>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="password" index="3">
+            <TKPropertyEditor tkEntityPropertyEditor type="Password"></TKPropertyEditor>
+            <TKMinimumLengthValidator tkEntityPropertyValidators errorMessage="Password must be at least 3 characters long." length="3"></TKMinimumLengthValidator>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="useSSL" displayName="Use SSL" index="4">
+            <TKPropertyEditor tkEntityPropertyEditor type="Switch"></TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="autoUpdate" displayName="Auto-Update" index="5">
+            <TKPropertyEditor tkEntityPropertyEditor type="Switch"></TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="autoUpdateInterval" displayName="Auto-Update Interval" index="6">
+            <TKRangeValidator tkEntityPropertyValidators errorMessage="Auto-Update Interval must be between 0-90." minimum="0" maximum="90"></TKRangeValidator>
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="mock" displayName="Mock Service" index="7">
+            <TKPropertyEditor tkEntityPropertyEditor type="Switch"></TKPropertyEditor>
+        </TKEntityProperty>
+    </RadDataForm>
+<!--    <Button class="btn btn-primary btn-active" id="proconIpSave" text="Save" (tap)="onSaveProconIp($event)"></Button>-->
+</StackLayout>

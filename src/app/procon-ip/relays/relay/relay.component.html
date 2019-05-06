@@ -1,0 +1,6 @@
+<DockLayout width="100%" stretchLastChild="true" [ngClass]="{'on': isOn, 'off': isOff}">
+    <Button text="Off" class="btn" [ngClass]="{'btn-active': isOff && !isAuto}" dock="right" (tap)="setOff()"></Button>
+    <Button text="On" class="btn" [ngClass]="{'btn-active': isOn && !isAuto}" dock="right" (tap)="setOn()"></Button>
+    <Button text="Auto" class="btn" [ngClass]="{'btn-active': isAuto}" dock="right" (tap)="setAuto()"></Button>
+    <Label [text]="label" dock="left"></Label>
+</DockLayout>

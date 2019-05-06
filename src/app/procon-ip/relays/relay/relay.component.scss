@@ -1,0 +1,20 @@
+Button {
+  margin: 5 0 5 5;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-width: 1;
+  border-radius: 5;
+  color: #000;
+}
+
+.btn-active {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-width: 2;
+}
+
+.on > .btn-active {
+  border-color: rgba(0, 255, 0, 0.3);
+}
+
+.off > .btn-active {
+  border-color: rgba(255, 0, 0, 0.3);
+}

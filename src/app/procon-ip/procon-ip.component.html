@@ -1,0 +1,30 @@
+<ActionBar class="action-bar">
+    <!--
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!--
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title fas" text="&#xf5c5; Procon IP"></Label>
+
+</ActionBar>
+
+<TabView id="proconIpTabView" [{ngModel}]="tabSelectedIndex" androidTabsPosition="bottom" class="page page-content fas h3">
+    <StackLayout *tabItem="{title: '&#xf205;'}" name="relaysTab">
+        <ns-relays></ns-relays>
+    </StackLayout>
+    <StackLayout *tabItem="{title: '&#xf3fd;'}">
+        <Label text="Second TabView item with Icon Font" textAlignment="center" textWrap="true" class="h2 m-x-auto" color="green"></Label>
+        <Label text="&#xe908;" textWrap="true" class="h2 m-x-auto" color="green"></Label>
+    </StackLayout>
+    <StackLayout *tabItem="{title: '&#xf05a;'}" name="systemTab">
+        <ns-system-info></ns-system-info>
+    </StackLayout>
+</TabView>

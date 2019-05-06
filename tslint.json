@@ -53,6 +53,7 @@
       "check-separator",
       "check-type",
       "check-preblock"
-    ]
+    ],
+    "no-bitwise": false
   }
 }
