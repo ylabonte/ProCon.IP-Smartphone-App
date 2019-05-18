@@ -65,10 +65,10 @@ export class GetStateService extends AbstractRequestService {
     update() {
         this.getData().subscribe((data) => {
             this.data.parseCsv(data);
-
-            this.data.getDataObjectsByCategory(GetStateCategory.RELAYS).forEach((relay: GetStateDataObject) => {
-                console.log(`Updated relay no. ${relay.categoryId}: ${relay.displayValue}`);
-            });
+            //
+            // this.data.getDataObjectsByCategory(GetStateCategory.RELAYS).forEach((relay: GetStateDataObject) => {
+            //     console.log(`Updated relay no. ${relay.categoryId}: ${relay.displayValue}`);
+            // });
         });
     }
 

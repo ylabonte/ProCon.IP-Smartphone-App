@@ -1,0 +1,38 @@
+<GridLayout columns="*,*" rows="auto">
+    <StackLayout *ngFor="let electrode of electrodes; let i = index" row="0" [col]="i">
+
+        <StackLayout orientation="horizontal" horizontalAlignment="center" class="m-b-8">
+            <Label [text]="electrode.label"></Label>
+        </StackLayout>
+
+        <StackLayout class="electrodesScaleWrapper">
+            <RadRadialGauge id="electrode{{ electrode.id }}" [title]="electrode.unit" row="2" col="2">
+                <TitleStyle tkRadialGaugeTitleStyle ios:textSize="12" ios:verticalOffset="15" android:verticalOffset="45"></TitleStyle>
+
+                <RadialScale tkRadialGaugeScales [startAngle]="electrode.scale.startAngle" [sweepAngle]="electrode.scale.sweepAngle" [minimum]="electrode.scale.min" [maximum]="electrode.scale.max" [radius]="electrode.scale.radius">
+                    <ScaleStyle tkRadialScaleStyle [labelsCount]="electrode.scale.labels" lineThickness="0" ticksOffset="0"
+                                [majorTicksCount]="electrode.scale.majorTicks" majorTicksStrokeColor="#333333" majorTicksFillColor="#333333"
+                                [minorTicksCount]="electrode.scale.minorTicks" majorTicksStrokeColor="#444444" majorTicksFillColor="#444444">
+                    </ScaleStyle>
+
+                    <RadialBarIndicator *ngFor="let indicator of electrode.scale.barIndicators"
+                                        tkRadialScaleIndicators [minimum]="indicator.min" [maximum]="indicator.max" [location]="indicator.location">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle [fillColor]="indicator.color" barWidth="0.09"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+
+                    <RadialNeedle tkRadialScaleIndicators [value]="electrode.value">
+                        <NeedleStyle tkRadialNeedleStyle
+                                     circleFillColor="#0F336D" circleStrokeColor="#0F336D"
+                                     strokeColor="#0F336D" fillColor="#0F336D">
+                        </NeedleStyle>
+                    </RadialNeedle>
+                </RadialScale>
+            </RadRadialGauge>
+        </StackLayout>
+
+        <StackLayout orientation="horizontal" horizontalAlignment="center" class="body">
+            <Label [text]="electrode.displayValue"></Label>
+        </StackLayout>
+
+    </StackLayout>
+</GridLayout>

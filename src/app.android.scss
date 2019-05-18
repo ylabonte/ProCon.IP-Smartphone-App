@@ -9,6 +9,17 @@
 @import 'app-common';
 
 // Place any CSS rules you want to apply only on Android here
-ActionBar .fa {
-    padding: 40px;
+
+.sidedrawer {
+    .sidedrawer-header {
+        padding-top: 40;
+    }
+}
+
+Switch[checked=true] {
+    background-color: rgb(0, 255, 0);
+    color: rgb(0, 153, 0);
+}
+Switch[checked=false] {
+    background-color: rgb(255, 0, 0);
 }

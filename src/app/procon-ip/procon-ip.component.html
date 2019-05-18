@@ -16,13 +16,12 @@
 
 </ActionBar>
 
-<TabView id="proconIpTabView" [{ngModel}]="tabSelectedIndex" androidTabsPosition="bottom" class="page page-content fas h3">
+<TabView id="proconIpTabView" [{ngModel}]="tabSelectedIndex" androidTabsPosition="bottom" class="fas h3">
     <StackLayout *tabItem="{title: '&#xf205;'}" name="relaysTab">
         <ns-relays></ns-relays>
     </StackLayout>
-    <StackLayout *tabItem="{title: '&#xf3fd;'}">
-        <Label text="Second TabView item with Icon Font" textAlignment="center" textWrap="true" class="h2 m-x-auto" color="green"></Label>
-        <Label text="&#xe908;" textWrap="true" class="h2 m-x-auto" color="green"></Label>
+    <StackLayout *tabItem="{title: '&#xf3fd;'}" name="measuresTab">
+        <ns-measures></ns-measures>
     </StackLayout>
     <StackLayout *tabItem="{title: '&#xf05a;'}" name="systemTab">
         <ns-system-info></ns-system-info>

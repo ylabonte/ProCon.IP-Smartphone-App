@@ -1,6 +1,24 @@
-<DockLayout width="100%" stretchLastChild="true" [ngClass]="{'on': isOn, 'off': isOff}">
-    <Button text="Off" class="btn" [ngClass]="{'btn-active': isOff && !isAuto}" dock="right" (tap)="setOff()"></Button>
-    <Button text="On" class="btn" [ngClass]="{'btn-active': isOn && !isAuto}" dock="right" (tap)="setOn()"></Button>
-    <Button text="Auto" class="btn" [ngClass]="{'btn-active': isAuto}" dock="right" (tap)="setAuto()"></Button>
-    <Label [text]="label" dock="left"></Label>
-</DockLayout>
+<GridLayout columns="*,auto" [ngClass]="{'on': isOn, 'off': isOff}" class="relayView">
+    <StackLayout col="0" verticalAlignment="center">
+        <Label [text]="label" class="label"></Label>
+    </StackLayout>
+<!--    <StackLayout col="1">-->
+<!--        <Label text="Auto" class="toggle-btn" [ngClass]="{'btn-active': isAuto}" (tap)="setAuto()"></Label>-->
+<!--        <Label text="On" class="toggle-btn" [ngClass]="{'btn-active': isOn && !isAuto}" (tap)="setOn()"></Label>-->
+<!--        <Label text="Off" class="toggle-btn" [ngClass]="{'btn-active': isOff && !isAuto}" (tap)="setOff()"></Label>-->
+<!--    </StackLayout>-->
+    <StackLayout col="1" orientation="horizontal" class="relayControls">
+        <StackLayout class="relay-button" orientation="horizontal"
+                     [ngClass]="{active: isAuto}" (tap)="toggleAuto()">
+            <Label [text]="this.isAuto ? 'Auto' : '&#xf011;'" class="relay-button-label fas" verticalAlignment="center"></Label>
+        </StackLayout>
+<!--        <Switch #relayToggle class="relayToggle m-16" [isEnabled]="!readonly"-->
+<!--                [ngClass]="{checked: isOn, disabled: readonly}" [checked]="isOn"-->
+<!--                (checkedChange)="isOn ? setOff() : setOn()">-->
+<!--        </Switch>-->
+        <Switch class="relayToggle m-16" [isEnabled]="!readonly"
+                [ngClass]="{checked: isOn, disabled: readonly}" [checked]="isOn"
+                (tap)="isOn ? setOff() : setOn()">
+        </Switch>
+    </StackLayout>
+</GridLayout>

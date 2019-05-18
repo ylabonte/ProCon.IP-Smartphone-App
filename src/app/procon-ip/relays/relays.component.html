@@ -1,7 +1,16 @@
-<ListView [items]="relays" class="list-group">
-    <ng-template let-relay="item" let-relayId="index" let-odd="odd" let-even="even">
-        <StackLayout orientation="horizontal" class="list-group-item" [ngClass]="{odd: odd, even: even}">
-            <ns-relay [data]="relay" [id]="relayId + 1"></ns-relay>
+<GridLayout class="page">
+    <ScrollView class="relaysView">
+        <StackLayout>
+            <StackLayout *ngFor="let relay of relays; let i = index">
+                <StackLayout orientation="horizontal" class="relayItem" [ngClass]="{odd: i % 2, even: !(i % 2)}">
+                    <ns-relay [data]="relay"></ns-relay>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout *ngFor="let dosageRelay of dosageRelays; let i = index">
+                <StackLayout orientation="horizontal" class="relayItem" [ngClass]="{odd: i % 2, even: !(i % 2)}">
+                    <ns-relay [data]="dosageRelay" readonly="true"></ns-relay>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
-    </ng-template>
-</ListView>
+    </ScrollView>
+</GridLayout>

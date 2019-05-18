@@ -1,5 +1,6 @@
 import { GetStateDataObject } from "./get-state-data-object";
 import { GetStateDataSysInfo } from "./get-state-data-sys-info";
+import { RelayDataObject } from "~/app/procon-ip/relays/relay/relay-data-object";
 
 export enum GetStateCategory {
     TIME = "time",
@@ -80,9 +81,45 @@ export class GetStateData {
             this.objects.filter((obj, idx) => indices.indexOf(idx) >= 0);
     }
 
+    getDataObject(id: number) {
+        return this.objects[id];
+    }
+
     getDataObjectsByCategory(category: string, activeOnly = false): Array<GetStateDataObject> {
         return this.categories[category] === undefined ?
             [] : this.getDataObjects(this.categories[category], activeOnly);
+    }
+
+    getChlorineDosageControlId(): number {
+        return Math.min.apply(Math, this.categories.relays) + Number(this.sysInfo.chlorineDosageRelais);
+    }
+
+    getPhMinusDosageControlId(): number {
+        return Math.min.apply(Math, this.categories.relays) + Number(this.sysInfo.phMinusDosageRelais);
+    }
+
+    getPhPlusDosageControlId(): number {
+        return Math.min.apply(Math, this.categories.relays) + Number(this.sysInfo.phPlusDosageRelais);
+    }
+
+    getChlorineDosageControl(): RelayDataObject {
+        return new RelayDataObject(this.getDataObject(this.getChlorineDosageControlId()));
+    }
+
+    getPhMinusDosageControl(): RelayDataObject {
+        return new RelayDataObject(this.getDataObject(this.getPhMinusDosageControlId()));
+    }
+
+    getPhPlusDosageControl(): RelayDataObject {
+        return new RelayDataObject(this.getDataObject(this.getPhPlusDosageControlId()));
+    }
+
+    isDosageControl(id: number) {
+        return [
+            this.getChlorineDosageControlId(),
+            this.getPhMinusDosageControlId(),
+            this.getPhPlusDosageControlId()
+        ].indexOf(id) >= 0;
     }
 
     parseCsv(csv: string) {

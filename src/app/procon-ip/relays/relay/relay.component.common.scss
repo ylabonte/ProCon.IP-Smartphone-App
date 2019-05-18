@@ -1,0 +1,53 @@
+.relayView {
+  margin: 8;
+  padding: 0 0 0 8;
+  border-radius: 8;
+  background-color: rgba(255, 255, 255, 0.2);
+
+  .relay-button {
+    height: 64;
+    border-left-width: 1;
+    border-right-width: 1;
+    border-color: rgba(255, 255, 255, 0.1);
+    //background-color: rgba(255, 255, 255, 0.05);
+  }
+  .relay-button-label {
+    width: 64;
+    text-align: center;
+  }
+
+  .relayToggle {
+    color: rgb(200, 200, 200);
+  }
+
+  &.on {
+    .relayControls {
+      background-color: rgba(0, 255, 0, 0.1);
+    }
+
+  }
+
+  &.off {
+    .relayControls {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+  }
+}
+
+
+//.toggle-btn {
+//  padding: 16 14 16 14;
+//  border-left-color: lightgray;
+//  border-left-width: 1;
+//}
+//
+//.btn-active {
+//}
+//
+//.on > .btn-active {
+//  color: rgba(0, 255, 0, 0.6);
+//}
+//
+//.off > .btn-active {
+//  color: rgba(255, 0, 0, 0.6);
+//}

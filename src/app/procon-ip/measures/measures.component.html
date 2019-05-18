@@ -1,0 +1,42 @@
+<ScrollView height="100%" class="page">
+
+    <StackLayout orientation="vertical" class="measuresView">
+
+<!--        <Label text="Electrodes &#xf3fd;" class=" text-center h3 m-t-8 m-b-10"></Label>-->
+        <StackLayout>
+            <DockLayout class="body m-b-2">
+                <Label text="Electrodes" class="text-left" dock="left"></Label>
+                <Label text="&#xf3fd;" class="fas text-right" dock="right"></Label>
+            </DockLayout>
+            <StackLayout orientation="horizontal">
+                <ns-electrodes [data]="electrodes"></ns-electrodes>
+            </StackLayout>
+        </StackLayout>
+
+<!--        <Label text="Temperatures &#xf2c9;" class=" text-center h3 m-t-16 m-b-10"></Label>-->
+        <StackLayout>
+            <DockLayout class="body m-b-2">
+                <Label text="Temperatures" class="text-left" dock="left"></Label>
+                <Label text="&#xf2c9;" class="fas text-right" dock="right"></Label>
+            </DockLayout>
+            <StackLayout *ngFor="let temp of temperatures" orientation="horizontal" horizontalAlignment="center" class="m-4">
+                <Label [text]="temp.label"></Label>
+                <Label text=": "></Label>
+                <Label [text]="temp.displayValue"></Label>
+            </StackLayout>
+        </StackLayout>
+
+<!--        <Label text="Canister &#xf613;" class="fas text-center h3 m-t-16 m-b-10"></Label>-->
+        <StackLayout>
+            <DockLayout class="body m-b-2">
+                <Label text="Canister" class="text-left" dock="left"></Label>
+                <Label text="&#xf613;" class="fas text-right" dock="right"></Label>
+            </DockLayout>
+            <StackLayout orientation="horizontal">
+                <ns-canister [data]="canister"></ns-canister>
+            </StackLayout>
+        </StackLayout>
+
+    </StackLayout>
+
+</ScrollView>

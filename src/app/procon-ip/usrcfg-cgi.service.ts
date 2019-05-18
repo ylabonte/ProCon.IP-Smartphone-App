@@ -7,11 +7,12 @@ import { GetStateDataObject } from "~/app/procon-ip/get-state-data-object";
 import { RelayDataInterpreter, RelayStateBitMask } from "~/app/procon-ip/relays/relay/relay-data-interpreter";
 import { Observable, of } from "rxjs";
 import { ProconIpSettings } from "~/app/procon-ip/procon-ip-settings";
+import { RelayDataObject } from "~/app/procon-ip/relays/relay/relay-data-object";
 
 export enum SetStateValue {
-    ON,
-    OFF,
-    AUTO
+    ON = 1,
+    OFF = 0,
+    AUTO = 2
 }
 
 @Injectable({
@@ -44,7 +45,7 @@ export class UsrcfgCgiService extends AbstractRequestService {
         this.setState(relayData, SetStateValue.AUTO);
     }
 
-    private setState(relay: GetStateDataObject, state: SetStateValue) {
+    private setState(relay: GetStateDataObject, state: SetStateValue|number) {
         let data: [number, number];
         let desiredValue: number;
         switch (state) {

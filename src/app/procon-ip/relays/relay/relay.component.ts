@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { GetStateDataObject } from "~/app/procon-ip/get-state-data-object";
 import { UsrcfgCgiService } from "~/app/procon-ip/usrcfg-cgi.service";
 import { RelayDataObject } from "~/app/procon-ip/relays/relay/relay-data-object";
 import { RelayDataInterpreter } from "~/app/procon-ip/relays/relay/relay-data-interpreter";
+import { Switch } from "tns-core-modules/ui/switch";
 
 /**
  * Setting relay state
@@ -28,6 +29,7 @@ import { RelayDataInterpreter } from "~/app/procon-ip/relays/relay/relay-data-in
 export class RelayComponent implements OnInit {
 
     @Input() data: RelayDataObject;
+    @Input() readonly: boolean;
 
     constructor(
         public relayDataInterpreter: RelayDataInterpreter,
@@ -70,5 +72,17 @@ export class RelayComponent implements OnInit {
 
     get isAuto(): boolean {
         return this.relayDataInterpreter.isAuto(this.data);
+    }
+
+    toggleAuto() {
+        if (this.isAuto) {
+            if (this.isOn) {
+                this.setOn();
+            } else {
+                this.setOff();
+            }
+        } else {
+            this.setAuto();
+        }
     }
 }

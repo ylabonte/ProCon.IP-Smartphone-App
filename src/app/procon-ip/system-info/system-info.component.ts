@@ -5,6 +5,7 @@ import { GetStateDataSysInfo } from "~/app/procon-ip/get-state-data-sys-info";
 @Component({
     selector: "ns-system-info",
     templateUrl: "./system-info.component.html",
+    styleUrls: ["./system-info.component.scss"],
     moduleId: module.id
 })
 export class SystemInfoComponent implements OnInit {
