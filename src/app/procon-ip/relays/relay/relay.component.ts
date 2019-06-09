@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { GetStateDataObject } from "~/app/procon-ip/get-state-data-object";
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { UsrcfgCgiService } from "~/app/procon-ip/usrcfg-cgi.service";
 import { RelayDataObject } from "~/app/procon-ip/relays/relay/relay-data-object";
 import { RelayDataInterpreter } from "~/app/procon-ip/relays/relay/relay-data-interpreter";
 import { Switch } from "tns-core-modules/ui/switch";
+import { EventData } from "tns-core-modules/data/observable";
+import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
 
 /**
  * Setting relay state
@@ -26,17 +27,32 @@ import { Switch } from "tns-core-modules/ui/switch";
     styleUrls: ["./relay.component.scss"],
     moduleId: module.id
 })
-export class RelayComponent implements OnInit {
+export class RelayComponent implements AfterViewInit {
 
     @Input() data: RelayDataObject;
     @Input() readonly: boolean;
+
+    @ViewChild("onOffToggle") onOffToggle: ElementRef;
 
     constructor(
         public relayDataInterpreter: RelayDataInterpreter,
         public usrcfgCgiService: UsrcfgCgiService
     ) {}
 
-    ngOnInit() {}
+    ngAfterViewInit() {
+        const onOffSwitch: Switch = this.onOffToggle.nativeElement;
+        if (onOffSwitch.isEnabled) {
+            console.log(`registering toggle event for ${this.data.label}`);
+            onOffSwitch.on("checkedChange", (event: EventData) => {
+                const eventSwitch = event.object as Switch;
+                if (eventSwitch.checked) {
+                    this.setOn();
+                } else {
+                    this.setOff();
+                }
+            });
+        }
+    }
 
     get label(): string {
         return this.data.label;
@@ -83,6 +99,15 @@ export class RelayComponent implements OnInit {
             }
         } else {
             this.setAuto();
+        }
+    }
+
+    toggleOnOff(event: EventData) {
+        const onOffSwitch = event.object as Switch;
+        if (onOffSwitch.checked) {
+            this.setOn();
+        } else {
+            this.setOff();
         }
     }
 }

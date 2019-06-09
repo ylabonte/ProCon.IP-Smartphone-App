@@ -47,7 +47,6 @@ export class ApplicationSetting extends Setting {
     }
 
     _set(value: any) {
-        console.log(`setting application value ${this.name} (${typeof value}):`, value);
         switch (this.type) {
             case SettingsFieldType.Boolean:
                 appSettings.setBoolean(this.storageField, value);

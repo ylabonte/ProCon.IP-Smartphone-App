@@ -18,21 +18,15 @@ export class MeasuresComponent implements OnInit {
     ngOnInit() {}
 
     get canister(): Array<GetStateDataObject> {
-        const canister = this.getStateService.data.getDataObjectsByCategory(GetStateCategory.CANISTER)
-                             .filter((can) => this.getStateService.data.sysInfo.isDosageEnabled(can));
-
-        return canister;
+        return this.getStateService.data.getDataObjectsByCategory(GetStateCategory.CANISTER)
+                                        .filter((can) => this.getStateService.data.sysInfo.isDosageEnabled(can));
     }
 
     get electrodes(): Array<GetStateDataObject> {
-        const electrodes = this.getStateService.data.getDataObjectsByCategory(GetStateCategory.ELECTRODES);
-
-        return electrodes;
+        return this.getStateService.data.getDataObjectsByCategory(GetStateCategory.ELECTRODES);
     }
 
     get temperatures(): Array<GetStateDataObject> {
-        const temperatures = this.getStateService.data.getDataObjectsByCategory(GetStateCategory.TEMPERATURES, true);
-
-        return temperatures;
+        return this.getStateService.data.getDataObjectsByCategory(GetStateCategory.TEMPERATURES, true);
     }
 }

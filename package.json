@@ -1,10 +1,10 @@
 {
   "nativescript": {
     "id": "org.nativescript.myhomecontrol",
-    "tns-android": {
+    "tns-ios": {
       "version": "5.3.1"
     },
-    "tns-ios": {
+    "tns-android": {
       "version": "5.3.1"
     }
   },
@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^7.2.15",
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
+    "ajv": "^6.10.0",
     "nativescript-angular": "~7.2.0",
     "nativescript-theme-core": "^1.0.6",
     "nativescript-ui-dataform": "^4.0.0",

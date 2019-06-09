@@ -10,15 +10,10 @@
     <StackLayout col="1" orientation="horizontal" class="relayControls">
         <StackLayout class="relay-button" orientation="horizontal"
                      [ngClass]="{active: isAuto}" (tap)="toggleAuto()">
-            <Label [text]="this.isAuto ? 'Auto' : '&#xf011;'" class="relay-button-label fas" verticalAlignment="center"></Label>
+            <Label [text]="isAuto ? 'Auto' : '&#xf011;'" class="relay-button-label fas" verticalAlignment="center"></Label>
         </StackLayout>
-<!--        <Switch #relayToggle class="relayToggle m-16" [isEnabled]="!readonly"-->
-<!--                [ngClass]="{checked: isOn, disabled: readonly}" [checked]="isOn"-->
-<!--                (checkedChange)="isOn ? setOff() : setOn()">-->
-<!--        </Switch>-->
-        <Switch class="relayToggle m-16" [isEnabled]="!readonly"
-                [ngClass]="{checked: isOn, disabled: readonly}" [checked]="isOn"
-                (tap)="isOn ? setOff() : setOn()">
+        <Switch #onOffToggle class="relayToggle m-16" [isEnabled]="!readonly"
+                [ngClass]="{checked: isOn, disabled: readonly}" [checked]="isOn">
         </Switch>
     </StackLayout>
 </GridLayout>

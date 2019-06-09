@@ -21,13 +21,4 @@ export class SettingsComponent implements OnInit {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
     }
-
-    // get proconIp(): IProconIpSettings {
-    //     return ProconIpSettings.instance().settings;
-    // }
-    //
-    // dfPropertyCommit(event: DataFormEventData) {
-    //     ProconIpSettings.instance().setField(event.propertyName,
-    //         this.proconIpSettings.dataForm.getPropertyByName(event.propertyName).valueCandidate);
-    // }
 }

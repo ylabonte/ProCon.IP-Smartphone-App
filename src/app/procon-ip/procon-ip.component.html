@@ -16,14 +16,22 @@
 
 </ActionBar>
 
-<TabView id="proconIpTabView" [{ngModel}]="tabSelectedIndex" androidTabsPosition="bottom" class="fas h3">
-    <StackLayout *tabItem="{title: '&#xf205;'}" name="relaysTab">
-        <ns-relays></ns-relays>
+<DockLayout class="page">
+    <StackLayout dock="top" id="errorView" #errorView>
+        <Label id="errorNoInternet" text="No internet connection" visibility="visible"></Label>
+        <Label id="errorReachability" text="Pool controller not reachable" visibility="visible"></Label>
     </StackLayout>
-    <StackLayout *tabItem="{title: '&#xf3fd;'}" name="measuresTab">
-        <ns-measures></ns-measures>
-    </StackLayout>
-    <StackLayout *tabItem="{title: '&#xf05a;'}" name="systemTab">
-        <ns-system-info></ns-system-info>
-    </StackLayout>
-</TabView>
+
+    <ActivityIndicator *ngIf="!getStateService.hasData()" dock="bottom" busy="true" width="100" height="100" class="activity-indicator"></ActivityIndicator>
+    <TabView *ngIf="getStateService.hasData()" dock="bottom" id="proconIpTabView" [{ngModel}]="tabSelectedIndex" androidTabsPosition="bottom" class="fas h3">
+        <StackLayout *tabItem="{title: '&#xf205; Relays'}" name="relaysTab">
+            <ns-relays></ns-relays>
+        </StackLayout>
+        <StackLayout *tabItem="{title: '&#xf3fd; Measures'}" name="measuresTab">
+            <ns-measures></ns-measures>
+        </StackLayout>
+    <!--    <StackLayout *tabItem="{title: '&#xf05a; SysInfo'}" name="systemTab">-->
+    <!--        <ns-system-info></ns-system-info>-->
+    <!--    </StackLayout>-->
+    </TabView>
+</DockLayout>

@@ -6,7 +6,7 @@
         </StackLayout>
 
         <StackLayout class="electrodesScaleWrapper">
-            <RadRadialGauge id="electrode{{ electrode.id }}" [title]="electrode.unit" row="2" col="2">
+            <RadRadialGauge id="electrode{{ electrode.id }}" [title]="electrode.unit">
                 <TitleStyle tkRadialGaugeTitleStyle ios:textSize="12" ios:verticalOffset="15" android:verticalOffset="45"></TitleStyle>
 
                 <RadialScale tkRadialGaugeScales [startAngle]="electrode.scale.startAngle" [sweepAngle]="electrode.scale.sweepAngle" [minimum]="electrode.scale.min" [maximum]="electrode.scale.max" [radius]="electrode.scale.radius">
@@ -15,12 +15,13 @@
                                 [minorTicksCount]="electrode.scale.minorTicks" majorTicksStrokeColor="#444444" majorTicksFillColor="#444444">
                     </ScaleStyle>
 
-                    <RadialBarIndicator *ngFor="let indicator of electrode.scale.barIndicators"
-                                        tkRadialScaleIndicators [minimum]="indicator.min" [maximum]="indicator.max" [location]="indicator.location">
+                    <RadialBarIndicator *ngFor="let indicator of electrode.scale.barIndicators" tkRadialScaleIndicators
+                                        [minimum]="indicator.min" [maximum]="indicator.max" [location]="indicator.location">
                         <BarIndicatorStyle tkRadialBarIndicatorStyle [fillColor]="indicator.color" barWidth="0.09"></BarIndicatorStyle>
                     </RadialBarIndicator>
 
-                    <RadialNeedle tkRadialScaleIndicators [value]="electrode.value">
+                    <RadialNeedle *ngFor="let val of asArray(electrode.value)"
+                                  tkRadialScaleIndicators [value]="val">
                         <NeedleStyle tkRadialNeedleStyle
                                      circleFillColor="#0F336D" circleStrokeColor="#0F336D"
                                      strokeColor="#0F336D" fillColor="#0F336D">
@@ -31,7 +32,7 @@
         </StackLayout>
 
         <StackLayout orientation="horizontal" horizontalAlignment="center" class="body">
-            <Label [text]="electrode.displayValue"></Label>
+            <Label [text]="electrode.value.toFixed(2)"></Label>
         </StackLayout>
 
     </StackLayout>

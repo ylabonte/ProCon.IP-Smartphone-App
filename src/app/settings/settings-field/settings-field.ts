@@ -67,7 +67,6 @@ export abstract class Setting implements ISettingsField {
     }
 
     set(value: any) {
-        console.log("setting value:", value);
         switch (this.type) {
             case SettingsFieldType.Boolean:
                 this._set(this.castBoolean(value));

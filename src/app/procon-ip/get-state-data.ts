@@ -59,10 +59,16 @@ export class GetStateData {
         canisterConsumptions: [[39, 41]]
     };
 
-    constructor(rawData: string) {
+    constructor(rawData?: string) {
         this.objects = [];
         this.active = [];
-        this.parseCsv(rawData);
+        if (rawData === undefined) {
+            this.raw = "";
+            this.parsed = [[]];
+            this.sysInfo = new GetStateDataSysInfo();
+        } else {
+            this.parseCsv(rawData);
+        }
     }
 
     getCategory(index: number): string {

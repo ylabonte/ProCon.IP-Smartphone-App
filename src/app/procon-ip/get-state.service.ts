@@ -8,6 +8,8 @@ import { AbstractRequestService } from "~/app/procon-ip/abstract-request-service
 import { RelayComponent } from "~/app/procon-ip/relays/relay/relay.component";
 import { RelaysComponent } from "~/app/procon-ip/relays/relays.component";
 import { GetStateDataObject } from "~/app/procon-ip/get-state-data-object";
+import { Label } from "tns-core-modules/ui/label";
+import { Visibility } from "tns-core-modules/ui/enums";
 
 @Injectable({
     providedIn: "root"
@@ -17,14 +19,19 @@ export class GetStateService extends AbstractRequestService {
 
     data: GetStateData;
 
+    private _hasData = false;
+
     private next = null;
+
+    private _errorView: Label;
 
     constructor(
         protected httpClient: HttpClient
     ) {
         super(httpClient);
         this.addHttpHeader("Accept", "text/csv,text/plain");
-        this.data = new GetStateData(GETSTATE);
+        this.data = new GetStateData();
+        // this.data = new GetStateData(GETSTATE);
     }
 
     getUpdateInterval(): number {
@@ -65,16 +72,18 @@ export class GetStateService extends AbstractRequestService {
     update() {
         this.getData().subscribe((data) => {
             this.data.parseCsv(data);
-            //
-            // this.data.getDataObjectsByCategory(GetStateCategory.RELAYS).forEach((relay: GetStateDataObject) => {
-            //     console.log(`Updated relay no. ${relay.categoryId}: ${relay.displayValue}`);
-            // });
+            this._hasData = true;
+            this._errorView.visibility = Visibility.collapse;
+        },
+        (error) => {
+            this._hasData = false;
+            this._errorView.visibility = Visibility.visible;
         });
     }
 
     getData(): Observable<string> {
         if (ProconIpSettings.instance().getField("mock").get()) {
-            return of(this.data.raw);
+            return of(GETSTATE);
         }
 
         return this.httpClient.get(this.url, {
@@ -82,5 +91,13 @@ export class GetStateService extends AbstractRequestService {
             observe: "body",
             headers: this.httpHeaders
         });
+    }
+
+    hasData(): boolean {
+        return this._hasData;
+    }
+
+    registerErrorView(msg: Label): void {
+        this._errorView = msg;
     }
 }

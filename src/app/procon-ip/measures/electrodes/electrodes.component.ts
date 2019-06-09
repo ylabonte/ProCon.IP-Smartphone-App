@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { GetStateDataObject } from "~/app/procon-ip/get-state-data-object";
 import { ElectrodeDataObject } from "~/app/procon-ip/measures/electrodes/electrode-data-object";
 import { IScaleParams, ScaleParams } from "~/app/procon-ip/measures/scale-params";
+import { GetStateCategory, GetStateData } from "~/app/procon-ip/get-state-data";
 
 @Component({
     selector: "ns-electrodes",
@@ -11,12 +12,16 @@ import { IScaleParams, ScaleParams } from "~/app/procon-ip/measures/scale-params
 })
 export class ElectrodesComponent implements OnInit {
 
-    @Input() data: Array<GetStateDataObject>;
-
-    electrodes: Array<ElectrodeDataObject>;
+    @Input() data: GetStateData;
 
     ngOnInit() {
-        this.electrodes = this.data.map((electrode) =>
+        this.data.getDataObjectsByCategory(GetStateCategory.ELECTRODES).forEach((e) => {
+            console.log(`${e.label}: ${e.value}`);
+        });
+    }
+
+    get electrodes() {
+        return this.data.getDataObjectsByCategory(GetStateCategory.ELECTRODES).map((electrode) =>
             new ElectrodeDataObject(electrode, this.getScale(electrode))
         );
     }
@@ -62,11 +67,15 @@ export class ElectrodesComponent implements OnInit {
                 }]);
                 break;
             case "mV":
-                return new ScaleParams(0.0, 640.0, 9, 3, 5);
+                return new ScaleParams(0.0, 1000.0, 11, 4, 6);
                 break;
             default:
                 return new ScaleParams();
                 break;
         }
+    }
+
+    asArray(value: any): Array<any> {
+        return Array.isArray(value) ? value : [value];
     }
 }

@@ -20,11 +20,6 @@ export class ProconIpSettingsComponent implements OnInit {
 
     ngOnInit() {}
 
-    // onDrawerButtonTap(): void {
-    //     const sideDrawer = <RadSideDrawer>app.getRootView();
-    //     sideDrawer.showDrawer();
-    // }
-
     get proconIp(): IProconIpSettings {
         return ProconIpSettings.instance().settings;
     }

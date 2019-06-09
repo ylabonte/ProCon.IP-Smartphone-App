@@ -1,7 +1,11 @@
 // You can add custom settings here
 // for example you can uncomment the following line to force distribution code signing
-// CODE_SIGN_IDENTITY = iPhone Distribution 
+CODE_SIGN_IDENTITY = "0488C71E-93C4-45BE-9C7C-E76468BC4B9C";
 // To build for device with XCode 8 you need to specify your development team.
-// DEVELOPMENT_TEAM = YOUR_TEAM_ID;
+// DEVELOPMENT_TEAM = SELFSIGNED;
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+
+// DEVELOPMENT_TEAM = 8KL389RMX2
+
+//DEVELOPMENT_TEAM = SELFSIGNED

@@ -10,15 +10,14 @@ declare var android: any;
 export abstract class AbstractRequestService {
     abstract urlPath: string;
 
-    protected httpHeaders: HttpHeaders;
+    protected _httpHeaders: HttpHeaders;
 
     protected const = AbstractRequestService;
 
     protected constructor(
         protected httpClient: HttpClient
     ) {
-        this.httpHeaders = new HttpHeaders();
-        this.addHttpHeader("Authorization", "Basic " + this.base64Credentials);
+        this._httpHeaders = new HttpHeaders();
     }
 
     static get settings(): IProconIpSettings {
@@ -29,12 +28,23 @@ export abstract class AbstractRequestService {
         return `${this.settings.useSSL ? "https://" : "http://"}${this.settings.host}`;
     }
 
+    get httpHeaders(): HttpHeaders {
+        if (this._httpHeaders.has("Authorization")) {
+            this._httpHeaders = this._httpHeaders.delete("Authorization")
+                                                 .set("Authorization", "Basic " + this.base64Credentials);
+        } else {
+            this._httpHeaders = this._httpHeaders.set("Authorization", "Basic " + this.base64Credentials);
+        }
+
+        return this._httpHeaders;
+    }
+
     get url(): string {
         return AbstractRequestService.baseUrl + this.urlPath;
     }
 
     addHttpHeader(name: string, value: string | Array<string>) {
-        this.httpHeaders = this.httpHeaders.set(name, value);
+        this._httpHeaders = this.httpHeaders.set(name, value);
     }
 
     private get base64Credentials(): string {
