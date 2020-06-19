@@ -49,4 +49,4 @@ Want to read more about this follow up project? See: https://github.com/ylabonte
 
 # License
 
-See: [LICENSE.md](./LICENSE.md)
+See: [LICENSE file](./LICENSE)
