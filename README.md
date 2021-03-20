@@ -1,8 +1,9 @@
 # Native Android & iOS app prototype<br>for the ProCon.IP pool controller
 
-This was just an experiment! I was interested in building a small app with NativeScript, 
-which is some kind of TypeScript that comes with an own transpiler and a special xml
-based templating language, which can then be used to build **native Android and iOS apps**.
+This was just an experiment which will not be continued! 
+I was interested in building a small app with NativeScript, which is some kind of TypeScript 
+that comes with an own transpiler and a special xml based templating language, which can then 
+be used to build **native Android and iOS apps**.
 
 
 ## What is this app for?
@@ -24,9 +25,6 @@ app marketplace. To be honest: The most expensive factor would be a release for 
 devices. But I am using iOS/iPadOS devices and so it would not make too much sense for me
 to release and maintain an app, that I am not even using myself...
 
-Maybe I will try to add build/release automation with Travis CI once I made this repo
-public. But that's no promise, just a _maybe_!
-
 
 ## Demo video
 
@@ -44,7 +42,9 @@ code, that abstracts the APIs of the pool controller. This more general approach
 and distributable for free and can be used to build custom mobile device compatible web apps
 and to integrate with further smart home stuff, such as voice assistants.
 
-Want to read more about this follow up project? See: https://github.com/ylabonte/ioBroker.procon-ip
+Want to read more about this follow up project(s)? 
+* See https://github.com/ylabonte/ioBroker.procon-ip for an ioBroker (home automation) adapter 
+* and https://github.com/ylabonte/procon-ip for the library code.
 
 
 # License
